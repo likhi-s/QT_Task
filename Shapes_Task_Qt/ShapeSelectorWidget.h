@@ -19,10 +19,10 @@ private:
     void setupUI();
     void setupConnections();
 
-    ShapeButton *rectBtn;
-    ShapeButton *circleBtn;
-    ShapeButton *triangleBtn;
-    ShapeButton *squareBtn;
+    ShapeButton *m_rectBtn;
+    ShapeButton *m_circleBtn;
+    ShapeButton *m_triangleBtn;
+    ShapeButton *m_squareBtn;
 
 
 };

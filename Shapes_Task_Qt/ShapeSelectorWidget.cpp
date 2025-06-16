@@ -20,33 +20,33 @@ void ShapeSelectorWidget::setupUI()
 
     QVBoxLayout *layout = new QVBoxLayout(this);
 
-    rectBtn = new ShapeButton(Shape_Rectangle);
-    circleBtn = new ShapeButton(Shape_Circle);
-    triangleBtn = new ShapeButton(Shape_Triangle);
-    squareBtn = new ShapeButton(Shape_Square);
+    m_rectBtn = new ShapeButton(Shape_Rectangle);
+    m_circleBtn = new ShapeButton(Shape_Circle);
+    m_triangleBtn = new ShapeButton(Shape_Triangle);
+    m_squareBtn = new ShapeButton(Shape_Square);
 
-    layout->addWidget(rectBtn);
-    layout->addWidget(circleBtn);
-    layout->addWidget(triangleBtn);
-    layout->addWidget(squareBtn);
+    layout->addWidget(m_rectBtn);
+    layout->addWidget(m_circleBtn);
+    layout->addWidget(m_triangleBtn);
+    layout->addWidget(m_squareBtn);
 }
 void ShapeSelectorWidget::setupConnections()
 {
     cout << "ShapeSelectorWidget setupConnections fun Called" << endl;
 
-    connect(rectBtn, &QPushButton::clicked, this, [=]() {
+    connect(m_rectBtn, &QPushButton::clicked, this, [=]() {
         emit shapeSelected(Shape_Rectangle);
     });
 
-    connect(circleBtn, &QPushButton::clicked, this, [=]() {
+    connect(m_circleBtn, &QPushButton::clicked, this, [=]() {
         emit shapeSelected(Shape_Circle);
     });
 
-    connect(triangleBtn, &QPushButton::clicked, this, [=]() {
+    connect(m_triangleBtn, &QPushButton::clicked, this, [=]() {
         emit shapeSelected(Shape_Triangle);
     });
 
-    connect(squareBtn, &QPushButton::clicked, this, [=]() {
+    connect(m_squareBtn, &QPushButton::clicked, this, [=]() {
         emit shapeSelected(Shape_Square);
     });
 }

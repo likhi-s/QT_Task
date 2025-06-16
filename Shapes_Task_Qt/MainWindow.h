@@ -23,11 +23,14 @@ public:
 private:
     void setupCentralWidget();
     void setupConnections();
+    void applyDefaultDrawingOptions();
+    void applyDefaultShapeOptions();
 
-    DrawAreaWidget *drawArea;
-    ShapeSelectorWidget *shapeSelector;
-    ShapeOptionsWidget *shapeOptions;
-    QSpinBox *penWidthBox;
+
+    DrawAreaWidget *m_drawArea;
+    ShapeSelectorWidget *m_shapeSelector;
+    ShapeOptionsWidget *m_shapeOptions;
+    QSpinBox *m_penWidthBox;
 };
 
 #endif // MAINWINDOW_H

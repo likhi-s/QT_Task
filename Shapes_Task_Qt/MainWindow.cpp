@@ -17,39 +17,51 @@ void MainWindow::setupCentralWidget()
 
     auto *mainLayout = new QHBoxLayout(central);
 
-    shapeSelector = new ShapeSelectorWidget();
-    shapeOptions = new ShapeOptionsWidget();
-    drawArea = new DrawAreaWidget();
-    drawArea->setFixedSize(350, 350);
+    m_shapeSelector = new ShapeSelectorWidget();
+    m_shapeOptions = new ShapeOptionsWidget();
+    m_drawArea = new DrawAreaWidget();
+    m_drawArea->setFixedSize(350, 350);
 
-    mainLayout->addWidget(shapeSelector, 0);
-    mainLayout->addWidget(drawArea, 1);
-    mainLayout->addWidget(shapeOptions, 0);
+    mainLayout->addWidget(m_shapeSelector, 0);
+    mainLayout->addWidget(m_drawArea, 1);
+    mainLayout->addWidget(m_shapeOptions, 0);
 }
+void MainWindow::applyDefaultDrawingOptions()
+{
+    int defaultPenWidth = 2;
+    QColor defaultBorderColor = Qt::black;
+    QColor defaultFillColor = Qt::white;
+
+    m_drawArea->setPenWidth(defaultPenWidth);
+    m_drawArea->setBorderColor(defaultBorderColor);
+    m_drawArea->setFillColor(defaultFillColor);
+}
+
+void MainWindow::applyDefaultShapeOptions()
+{
+    int defaultPenWidth = 2;
+    QColor defaultBorderColor = Qt::black;
+    QColor defaultFillColor = Qt::white;
+
+    m_shapeOptions->setPenWidth(defaultPenWidth);
+    m_shapeOptions->setBorderColor(defaultBorderColor);
+    m_shapeOptions->setFillColor(defaultFillColor);
+}
+
 void MainWindow::setupConnections()
 {
     cout<<"MainWindow setupConnections function called "<<endl;
-
-    connect(shapeSelector, &ShapeSelectorWidget::shapeSelected, this, [=](int type)
+    connect(m_shapeSelector, &ShapeSelectorWidget::shapeSelected, this, [=](int type)
             {
-                int defaultPenWidth = 2;
-                QColor defaultBorderColor = Qt::black;
-                QColor defaultFillColor = Qt::white;
+                applyDefaultDrawingOptions();
+                applyDefaultShapeOptions();
 
-                drawArea->setPenWidth(defaultPenWidth);
-                drawArea->setBorderColor(defaultBorderColor);
-                drawArea->setFillColor(defaultFillColor);
-
-                shapeOptions->setPenWidth(defaultPenWidth);
-                shapeOptions->setBorderColor(defaultBorderColor);
-                shapeOptions->setFillColor(defaultFillColor);
-
-                drawArea->setShape(static_cast<DrawAreaWidget::Shape>(type));
+                m_drawArea->setShape(static_cast<DrawAreaWidget::Shape>(type));
             });
 
-    connect(shapeOptions, &ShapeOptionsWidget::penWidthChanged, drawArea, &DrawAreaWidget::setPenWidth);
-    connect(shapeOptions, &ShapeOptionsWidget::borderColorChanged, drawArea, &DrawAreaWidget::setBorderColor);
-    connect(shapeOptions, &ShapeOptionsWidget::fillColorChanged, drawArea, &DrawAreaWidget::setFillColor);
+    connect(m_shapeOptions, &ShapeOptionsWidget::penWidthChanged, m_drawArea, &DrawAreaWidget::setPenWidth);
+    connect(m_shapeOptions, &ShapeOptionsWidget::borderColorChanged, m_drawArea, &DrawAreaWidget::setBorderColor);
+    connect(m_shapeOptions, &ShapeOptionsWidget::fillColorChanged, m_drawArea, &DrawAreaWidget::setFillColor);
 }
 
 
